@@ -1,0 +1,22 @@
+#temp
+~
+
+# Java class files
+*.class
+
+# Eclipse project files
+.classpath
+.project
+/bin
+/gen
+
+/node_modules/
+npm-debug.log
+
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+*.sublime-project
+*.sublime-workspace
