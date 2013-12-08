@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title><%= title %></title>
+
+    <meta name="description" content="">
+    <meta name="author" content="ink, cookbook, recipes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link rel="stylesheet" type="text/css" href="public/ink/css/ink-min.css">
+    <link rel="stylesheet" type="text/css" href="public/main.css">
+
+    <!--[if IE 7 ]><link rel="stylesheet" href="public/ink/css/ink-ie7.css" type="text/css" media="screen" title="no title" charset="utf-8"><![endif]-->
+
+    <link rel="shortcut icon" href="public/favicon.ico">
+
+    <link rel="apple-touch-icon-precomposed" href="/public/logo/sizes/logo-57.png"> 
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/public/logo/ios/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="public/logo/ios/apple-touch-icon-114x114-precomposed.png">
+
+    <link rel="apple-touch-startup-image" href="public/logo/splash320.png" media="screen and (min-device-width: 200px) and (max-device-width: 320px) and (orientation:portrait)">
+
+    <script type="text/javascript" src="http://cdn.ink.sapo.pt/2.2.1/js/ink.min.js"></script>
+    <script type="text/javascript" src="public/ink/js/ink.table.js"></script>
+    <script type="text/javascript" src="http://cdn.ink.sapo.pt/2.2.1/js/ink-ui.min.js"></script>
+
+    <script type="text/javascript" src="public/ejs_0.9.js"></script>
+    <script type="text/javascript" src="public/main.min.js"></script>
+</head>
+<body>
+    <div class="ink-grid">
+
+        <header>
+            <h1 class="pull-left medium-100 small-100">
+                <span style="color: #004276;">Inter</span>
+                <img src="/public/logo.png" alt="<%= title %>" style="width:35px;" />
+                <span style="color: #C00;">Views</span>
+            </h1>
+
+            <nav class="ink-navigation pull-right medium-100 small-100">
+                <ul class="menu horizontal rounded shadowed red">
+                    <li><a onclick="showHide();" href="#"><span class="icon-search"></span> <b class="content-left hide-small">Filter</b></a></li>
+                    <li><a onclick="showHide('create');" href="#"><span class="icon-edit"></span> <b class="content-left hide-small">New Candidate</b></a></li>
+                    <li><a onclick="loadSummary();" href="#"><span class="icon-time"></span> <b class="content-left hide-small">Summary</b></a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="box" id="msgBox" style="display:none;"></div>       
+
+        <div class="column-group gutters">
+            <div class="large-100 medium-100 small-100">
+                <form action="#" class=" ink-form ink-label error" id="filterForm" style="display:none;">
+                    <fieldset class="column-group gutters">
+                        <div class="control-group large-25 medium-25 small-100">
+                            <label for="fFirstName">First Name</label>
+                            <div class="control">
+                                <input type="text" id="fFirstName" name="f[firstName]">
+                            </div>
+                        </div>
+
+                        <div class="control-group large-25 medium-25 small-100">
+                            <label for="fLastName">Last Name</label>
+                            <div class="control">
+                                <input type="text" id="fLastName" name="f[lastName]">
+                            </div>
+                        </div>
+
+                        <div class="control-group large-25 medium-25 small-100">
+                            <label for="fPhone">Phone</label>
+                            <div class="control">
+                                <input type="text" id="fPhone" name="f[phone]">
+                            </div>
+                        </div>
+
+                        <div class="control-group large-25 medium-25 small-100">
+                            <label for="fEmail">Email</label>
+                            <div class="control">
+                                <input type="text" id="fEmail" name="f[email]">
+                            </div>
+                        </div>
+
+                        <div class="control-group large-25 medium-25 small-100">
+                            <label for="fStatus">Status</label>
+                            <div class="control">
+                                <select id="fStatus" name="f[status]">
+                                    <option label=" - " value=""> - </option>
+                                    <option label="To Call" value="2">To Call</option>
+                                    <option label="Rejected" value="3">Rejected</option>
+                                    <option label="Done" value="4">Done</option>
+                                    <option label="Paid" value="5">Paid</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group large-10 medium-10 small-100">
+                            <label for="language_skills">Skills</label>
+                            <div class="control">
+                                <select id="fLanguageSkills" name="f[language_skills]">
+                                    <option label="-" value="">-</option>
+                                    <option label="1" value="1">1</option>
+                                    <option label="2" value="2">2</option>
+                                    <option label="3" value="3">3</option>
+                                    <option label="4" value="4">4</option>
+                                    <option label="5" value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+<!--                    <div class="control-group large-25 medium-25 small-100">
+                            <label for="fStartdate">Date From</label>
+                            <div class="control">
+                                <input type="text" size="10" value="" id="fStartdate" name="f[startdate]" class="ink-datepicker">
+                            </div>
+                        </div>
+
+                        <div class="control-group large-25 medium-25 small-100">
+                            <label for="fEnddate">Date To</label>
+                            <div class="control">
+                                <input type="text" size="10" value="" id="fEnddate" name="f[enddate]" class="ink-datepicker">
+                            </div>
+                        </div> -->
+                        <div class="control-group large-25 medium-25 small-100">
+                            <label for="search-button"> &nbsp; </label>
+                            <div class="control">
+                             <input type="button" class="ink-button" value="Search" onclick="filterTable();" />
+                         </div>
+                     </div>
+
+                 </fieldset>
+             </form>
+         </div>
+
+         <div class="large-100 medium-100 small-100">
+            <form action="#" class="ink-form ink-label info" id="createForm" style="display:none;"
+            method="post" enctype="multipart/form-data">
+
+            <fieldset class="column-group gutters">
+                <div class="control-group large-25 medium-25 small-100 required">
+                    <label for="firstName">First Name</label>
+                    <div class="control">
+                        <input type="text" id="firstName" name="firstName" class="ink-fv-required">
+                    </div>
+                </div>
+
+                <div class="control-group large-25 medium-25 small-100 required">
+                    <label for="lastName">Last Name</label>
+                    <div class="control">
+                        <input type="text" id="lastName" name="lastName" class="ink-fv-required">
+                    </div>
+                </div>
+
+                <div class="control-group large-25 medium-25 small-100 required">
+                    <label for="phone">Phone</label>
+                    <div class="control">
+                        <input type="text" id="phone" name="phone" class="ink-fv-required">
+                    </div>
+                </div>
+
+                <div class="control-group large-25 medium-25 small-100">
+                    <label for="email">Email</label>
+                    <div class="control">
+                        <input type="text" id="email" name="email">
+                        <p class="tip">&nbsp;</p>
+                    </div>
+                </div>
+
+                <div class="control-group large-10 medium-10 small-100">
+                    <label for="language_skills">Skills</label>
+                    <div class="control">
+                        <select id="language_skills" name="language_skills">
+                            <option label="-" value="0">-</option>
+                            <option label="1" value="1">1</option>
+                            <option label="2" value="2">2</option>
+                            <option label="3" value="3">3</option>
+                            <option label="4" value="4">4</option>
+                            <option label="5" value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group large-10 medium-10 small-100">
+                    <label for="minutes">Minutes</label>
+                    <div class="control">
+                        <input type="text" class="text" maxlength="10" value="" id="minutes" name="minutes">
+                    </div>
+                </div>
+
+                <div class="control-group large-15 medium-15 small-100">
+                    <label for="status">Status</label>
+                    <div class="control">
+                        <select id="status" name="status" class="">
+                            <option label="To Call" value="2">To Call</option>
+                            <option label="Rejected" value="3">Rejected</option>
+                            <option label="Done" value="4">Done</option>
+                            <option label="Paid" value="5">Paid</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group large-15 medium-15 small-100">
+                    <label for="date_created">Date</label>
+                    <div class="control">
+                        <input type="text" value="" id="date_created" name="date_created" >
+                    </div>
+                </div>
+
+                <div class="control-group large-35 medium-100 small-100">
+                    <label for="date_created">Comment</label>
+                    <div class="control">
+                        <textarea rows="8" cols="12" id="text" name="text"></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group large-25 medium-25 small-100">
+                    <div class="control">
+                       <label for="save"></label>
+                       <input type="button" class="ink-button blue" value="Save" onclick="userCreate();" />
+                   </div>
+               </div>
+           </fieldset>
+       </form>
+   </div>
+
+   <div class="large-100 medium-100 small-100">
+       <form action="#" class="ink-form ink-label warning" id="updateForm" style="display:none;" method="post">
+
+           <fieldset class="column-group gutters">
+            <div class="control-group large-25 medium-25 small-100 required">
+                <label for="firstName">First Name</label>
+                <div class="control">
+                    <input type="text" id="ufirstName" name="firstName" class="ink-fv-required">
+                </div>
+            </div>
+
+            <div class="control-group large-25 medium-25 small-100 required">
+                <label for="lastName">Last Name</label>
+                <div class="control">
+                    <input type="text" id="ulastName" name="lastName" class="ink-fv-required">
+                </div>
+            </div>
+
+            <div class="control-group large-25 medium-25 small-100 required">
+                <label for="phone">Phone</label>
+                <div class="control">
+                    <input type="text" id="uphone" name="phone" class="ink-fv-required">
+                </div>
+            </div>
+
+            <div class="control-group large-25 medium-25 small-100">
+                <label for="email">Email</label>
+                <div class="control">
+                    <input type="text" id="uemail" name="email">
+                    <p class="tip">&nbsp;</p>
+                </div>
+            </div>
+
+            <div class="control-group large-10 medium-10 small-100">
+                <label for="language_skills">Skills</label>
+                <div class="control">
+                    <select id="ulanguage_skills" name="language_skills">
+                        <option label="-" value="0">-</option>
+                        <option label="1" value="1">1</option>
+                        <option label="2" value="2">2</option>
+                        <option label="3" value="3">3</option>
+                        <option label="4" value="4">4</option>
+                        <option label="5" value="5">5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group large-10 medium-10 small-100">
+                <label for="minutes">Minutes</label>
+                <div class="control">
+                    <input type="text" class="text" maxlength="10" value="" id="uminutes" name="minutes">
+                </div>
+            </div>
+
+            <div class="control-group large-15 medium-15 small-100">
+                <label for="status">Status</label>
+                <div class="control">
+                    <select id="ustatus" name="status" class="">
+                        <option label="To Call" value="2">To Call</option>
+                        <option label="Rejected" value="3">Rejected</option>
+                        <option label="Done" value="4">Done</option>
+                        <option label="Paid" value="5">Paid</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group large-15 medium-15 small-100">
+                <label for="date_created">Date</label>
+                <div class="control">
+                    <input type="text" value="" id="udate_created" name="date_created" >
+                </div>
+            </div>
+
+            <div class="control-group large-50 medium-50 small-100">
+                <label for="date_created">Comment</label>
+                <div class="control">
+                    <textarea rows="8" cols="12" id="utext" name="text"></textarea>
+                </div>
+            </div>
+
+            <div class="control-group large-25 medium-25 small-100">
+                <div class="control">
+                    <label for="save"></label>
+                    <input type="button" class="ink-button blue" value="Save" onclick="userUpdate();" />
+                </div>
+            </div>
+
+            <div class="control-group large-25 medium-25 small-100">
+                <div class="control">
+                   <label for="download"></label>
+                   <input name="download" type="button" class="ink-button green" value="Download" onclick="downloadFile();" />
+                   <iframe scrolling="no" frameborder="0" id="downloadIFrame" src="/" style="width:0px;height:0px;" border="0"></iframe> 
+
+               </div>
+           </div>
+
+           <div class="control-group large-25 medium-25 small-100">
+            <div class="control">
+               <label for="upload"></label>
+               <input name="upload" type="button" class="ink-button red" value="Upload" onclick="showUploadForm();" />
+           </div>
+       </div>
+
+   </fieldset>
+   <input type="hidden" id="u__id" name="_id" value="" />
+   <input type="hidden" id="u_id" name="id" value="" />
+</form>
+
+<div class="ink-form ink-label info" id="uploadForm" style="display:none;height:200px;" height="300px">
+   <iframe scrolling="no" frameborder="0" id="uploadIFrame" src="form/" style="width:100%;height:100%;" border="0"></iframe> 
+</div>
+
+</div>
+</div>
+
+<div class="box" id="summaryBox" style="display:none;"></div> 
+
+<div class="box" id="tableBox" style="margin-top:3px;">
+    <div class="column-group gutters">
+        <div class="large-100 medium-100 small-100">
+
+            <section id="special">
+                <div class="box">
+                    <table id="listTable" class="ink-table bordered hover" data-page-size="15">
+                        <thead>
+                            <tr class="ink-label info">
+                                <th class="content-left">ID</th>
+                                <th class="content-left hide-small">Name</th>
+                                <th class="content-left hide-small">Phone</th>
+                                <th class="content-left hide-small">Skills</th>
+                                <th class="content-left hide-small">Minutes</th>
+                                <th class="content-left hide-small hide-medium">Status</th>
+                                <th class="content-left hide-small hide-medium">Date</th>
+                                <th class="content-left">Actions</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<footer>
+    <div class="ink-grid blue">
+        <nav class="ink-navigation push-left medium-100 small-100 small-push-left">
+        </nav>
+        <p class="push-right small-100"></p>
+    </div>
+</footer>
+</body>
+</html>

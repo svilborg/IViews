@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/public/ink/css/ink-min.css">
+	<link rel="stylesheet" type="text/css" href="/public/main.css">
+</head>
+
+<body>
+	<div class="ink-grid">
+		<div class="column-group gutters">
+			<div class="large-100 medium-100 small-100">
+				<form method='post' action='/upload' enctype='multipart/form-data' class=" ink-form ink-label info">
+
+					<fieldset class="column-group gutters">
+
+						<div class="control-group large-100 medium-100 small-100">
+							<label for="image">File
+								<% if(error) {%>
+								<div for="error" class="ink-label error"><%= error %></div>
+								<% } else if (ok)  {%>
+								<div for="success" class="ink-label success">File Uploaded!</div>
+								<% } %>
+							</label>
+							<div class="control">
+								<input type='file' name='image' style="color: #fff;"/>
+							</div>
+						</div>
+
+						<div class="control-group large-50 medium-100 small-100">
+							<div class="control">								
+								<input type="hidden" id="id" name="id" value="<%= id %>" />
+								<input type="submit" class="ink-button blue" value="Upload"/>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
