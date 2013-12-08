@@ -1,0 +1,51 @@
+{
+  "name": "IViews",
+  "version": "1.0.0",
+  "description": "Interviews",
+  "keywords": [
+    "Interviews",
+    "Node.js",
+    "Javascript",
+    "Ink"
+  ],
+  "author": {
+    "name": "Interviews",
+    "email": "svilborg@gmail.com"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+
+  "dependencies": {
+    "express": "3.4.1",
+    "ejs": "*",
+    "ejs-locals": ">= 0.0.0",
+    "mongojs": "*",
+    "http-auth": ">=0.0.0",
+    "config": ">=0.0.0",
+    "passport": ">= 0.0.0",
+    "passport-local": ">= 0.0.0",
+    "connect-flash": "*"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0",
+    "jshint": "~2.3.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.0",
+    "grunt-contrib-clean": "~0.5.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js"
+}
