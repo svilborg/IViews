@@ -28,7 +28,6 @@
     "ejs": "*",
     "ejs-locals": ">= 0.0.0",
     "mongojs": "*",
-    "http-auth": ">=0.0.0",
     "config": ">=0.0.0",
     "passport": ">= 0.0.0",
     "passport-local": ">= 0.0.0",
