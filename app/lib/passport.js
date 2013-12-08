@@ -10,9 +10,8 @@ passport.use(new LocalStrategy(function (username, password, done) {
     db.users.findOne({
         username : username
     }, function (e, record) {
-        // console.log("USER QQ", e, record);
         if (!e && record) {
-            if(record.password === password) {
+            if (record.password === password) {
                 record.password = "---";
 
                 return done(null, record);
@@ -27,12 +26,10 @@ passport.use(new LocalStrategy(function (username, password, done) {
 }));
 
 passport.serializeUser(function (user, done) {
-    // console.log("USER SERIAL", user);
     done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
-    // console.log("USER UNSER", user);
     done(null, user);
 });
 

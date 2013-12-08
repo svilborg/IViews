@@ -3,7 +3,6 @@
 'use strict';
 
 var express = require('express'),
-auth        = require('http-auth'),
 passport    = require('./app/lib/passport.js'),
 flash       = require('connect-flash');
 
@@ -62,14 +61,6 @@ var IViewsApp = function () {
         });
     };
 
-    self.getAuthentication = function () { 
-        var basic = auth.basic({
-            realm: 'IViews Area',
-            file: __dirname + '/data/users.htpasswd'
-        });
-        return basic;
-    };
-
     self.checkAuthentication = function (req, res, next) {
         if (req.isAuthenticated()) {
             return next();
@@ -101,20 +92,17 @@ var IViewsApp = function () {
         self.app.set('view engine', 'ejs');
         self.app.engine('ejs', require('ejs-locals'));
 
-        //self.app.use(auth.connect(self.getAuthentication()));
-
         self.app.use(express.cookieParser());
         self.app.use(express.session({ name: 'ivewssion', secret: 'iviewssion' }));
         self.app.use(passport.initialize());
         self.app.use(passport.session());
 
-        self.app.use(express.logger('dev'));
         self.app.use(express.session({ secret: 'keyboard cat' }));
         self.app.use(express.bodyParser());
         self.app.use(express.methodOverride());
         self.app.use(flash());
-        // self.app.use(self.app.router);
-
+        //self.app.use(express.logger('dev'));
+        
         // Routes
         ////////////////
         
