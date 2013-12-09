@@ -6,7 +6,7 @@ Node JS Application for managing interviews
 ## Installation
 
 ```
-npm install -g npm-check-updates
+npm install
 ```
 
 ## Start
