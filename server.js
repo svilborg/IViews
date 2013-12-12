@@ -7,8 +7,6 @@ var express = require('express'),
     flash = require('connect-flash'),
     config = require('./app/config');
 
-console.log("config :::", config);
-
 // Define the application.
 var IViewsApp = function () {
 
@@ -101,15 +99,14 @@ var IViewsApp = function () {
 
         self.app.use(express.cookieParser());
         self.app.use(express.session({
-            name: 'ivewssion',
-            secret: 'iviewssion'
+            name: config.session.name,
+            secret: config.session.secret,
+            key : config.session.key
         }));
-        self.app.use(passport.initialize());
+
+        self.app.use(passport.initialize());       
         self.app.use(passport.session());
 
-        self.app.use(express.session({
-            secret: 'keyboard cat'
-        }));
         self.app.use(express.bodyParser());
         self.app.use(express.methodOverride());
         self.app.use(flash());
