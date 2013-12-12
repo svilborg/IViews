@@ -12,11 +12,12 @@ var config = {
 	},
 	session: {
 		name: 'iviewss',
-		secret: 'iviewss' + Math.random().toString(),
+		secret: 'iviews',
 		key: 'iviewss'
 	}
 };
 
 config.mongo.db = config.mongo.host + "/" + config.mongo.name;
+config.session.secret = require('crypto').createHash('md5').update(config.session.secret).digest("hex");
 
 exports.config = config;

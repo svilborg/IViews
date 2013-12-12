@@ -12,11 +12,12 @@ var config = {
 	},
 	session: {
 		name: 'iviewss',
-		secret: process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "_" + username: process.env.OPENSHIFT_MONGODB_DB_USERNAME,
+		secret: process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "|" + process.env.OPENSHIFT_MONGODB_DB_USERNAME,
 		key: 'iviewss'
 	}
 };
 
 config.mongo.db = config.mongo.username + ':' + config.mongo.password + '@' + config.mongo.host + ':' + config.mongo.port + '/' + config.name;
+config.session.secret = require('crypto').createHash('md5').update(config.session.secret).digest("hex");
 
 exports.config = config;
