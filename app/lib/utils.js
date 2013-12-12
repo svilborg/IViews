@@ -69,8 +69,8 @@ exports.getStatusClass = function (statusId) {
 };
 
 exports.getButtonBar = function (id) { 
-    var res = '<button class="ink-button" data-id="' + id + '" style="margin: 1pt;" onclick="showUpdateForm(\'' + id + '\');"><span class="icon-edit"></span></button>' +
-    '<button class="ink-button" data-id="' + id + '" style="margin: 1pt;" onclick="userDelete(\'' + id + '\');"><span class="icon-trash"></span></button>';
+    var res = '<button class="ink-button" data-id="' + id + '" style="margin: 1pt;" onclick="Ink.Comix.IViews.showUpdateForm(\'' + id + '\');"><span class="icon-edit"></span></button>' +
+    '<button class="ink-button" data-id="' + id + '" style="margin: 1pt;" onclick="Ink.Comix.IViews.userDelete(\'' + id + '\');"><span class="icon-trash"></span></button>';
 
     return res;
 };

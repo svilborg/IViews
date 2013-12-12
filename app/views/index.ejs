@@ -19,8 +19,8 @@
 
     <link rel="shortcut icon" href="public/favicon.ico">
 
-    <link rel="apple-touch-icon-precomposed" href="/public/logo/sizes/logo-57.png"> 
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/public/logo/ios/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="public/logo/sizes/logo-57.png"> 
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="public/logo/ios/apple-touch-icon-72x72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="public/logo/ios/apple-touch-icon-114x114-precomposed.png">
 
     <link rel="apple-touch-startup-image" href="public/logo/splash320.png" media="screen and (min-device-width: 200px) and (max-device-width: 320px) and (orientation:portrait)">
@@ -30,7 +30,8 @@
     <script type="text/javascript" src="http://cdn.ink.sapo.pt/2.2.1/js/ink-ui.min.js"></script>
 
     <script type="text/javascript" src="public/ejs_0.9.js"></script>
-    <script type="text/javascript" src="public/main.min.js"></script>
+    <script type="text/javascript" src="public/main.js"></script>
+    <!--<script type="text/javascript" src="public/main.min.js"></script>-->
 </head>
 <body>
     <div class="ink-grid">
@@ -44,9 +45,9 @@
 
             <nav class="ink-navigation pull-right medium-100 small-100">
                 <ul class="menu horizontal rounded shadowed red">
-                    <li><a onclick="showHide();" href="#"><span class="icon-search"></span> <b class="content-left hide-small">Filter</b></a></li>
-                    <li><a onclick="showHide('create');" href="#"><span class="icon-edit"></span> <b class="content-left hide-small">New Candidate</b></a></li>
-                    <li><a onclick="loadSummary();" href="#"><span class="icon-time"></span> <b class="content-left hide-small">Summary</b></a></li>
+                    <li><a href="#" id="menuFilter"><span class="icon-search"></span> <b class="content-left hide-small">Filter</b></a></li>
+                    <li><a href="#" id="menuNew"><span class="icon-edit"></span> <b class="content-left hide-small">New Candidate</b></a></li>
+                    <li><a href="#" id="menuSummary"><span class="icon-time"></span> <b class="content-left hide-small">Summary</b></a></li>
                 </ul>
             </nav>
         </header>
@@ -112,7 +113,8 @@
                             </div>
                         </div>
 
-<!--                    <div class="control-group large-25 medium-25 small-100">
+                        <!--                   
+                            <div class="control-group large-25 medium-25 small-100">
                             <label for="fStartdate">Date From</label>
                             <div class="control">
                                 <input type="text" size="10" value="" id="fStartdate" name="f[startdate]" class="ink-datepicker">
@@ -128,7 +130,7 @@
                         <div class="control-group large-25 medium-25 small-100">
                             <label for="search-button"> &nbsp; </label>
                             <div class="control">
-                             <input type="button" class="ink-button" value="Search" onclick="filterTable();" />
+                             <input type="button" class="ink-button" value="Search" id="formSearch"/>
                          </div>
                      </div>
 
@@ -220,7 +222,7 @@
                 <div class="control-group large-25 medium-25 small-100">
                     <div class="control">
                        <label for="save"></label>
-                       <input type="button" class="ink-button blue" value="Save" onclick="userCreate();" />
+                       <input type="button" class="ink-button blue" value="Save" id="formSave"/>
                    </div>
                </div>
            </fieldset>
@@ -310,14 +312,14 @@
             <div class="control-group large-25 medium-25 small-100">
                 <div class="control">
                     <label for="save"></label>
-                    <input type="button" class="ink-button blue" value="Save" onclick="userUpdate();" />
+                    <input type="button" class="ink-button blue" value="Save" id="formUpdate" />
                 </div>
             </div>
 
             <div class="control-group large-25 medium-25 small-100">
                 <div class="control">
                    <label for="download"></label>
-                   <input name="download" type="button" class="ink-button green" value="Download" onclick="downloadFile();" />
+                   <input name="download" type="button" class="ink-button green" value="Download" id="formDownload" />
                    <iframe scrolling="no" frameborder="0" id="downloadIFrame" src="/" style="width:0px;height:0px;" border="0"></iframe> 
 
                </div>
@@ -326,7 +328,7 @@
            <div class="control-group large-25 medium-25 small-100">
             <div class="control">
                <label for="upload"></label>
-               <input name="upload" type="button" class="ink-button red" value="Upload" onclick="showUploadForm();" />
+               <input name="upload" type="button" class="ink-button red" value="Upload" id="formShowUpload" />
            </div>
        </div>
 
