@@ -3,6 +3,7 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         jshint: {
             files: ['Gruntfile.js', 'server.js', 'app/**/*.js', 'public/main.js'],
             options: {
@@ -10,7 +11,7 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            my_target: {
+            main: {
                 files: {
                     'public/main.min.js': ['public/main.js']
                 }

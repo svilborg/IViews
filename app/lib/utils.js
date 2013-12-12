@@ -1,23 +1,11 @@
 'use strict';
 
-exports.getUploadDir = function () {
-    var dataDir = process.env.OPENSHIFT_DATA_DIR;
-
-    if (typeof dataDir === 'undefined') {
-        dataDir = __dirname + '/../../data';
-    }
-    else {
-        dataDir = dataDir + 'uploads';
-    }
-
-    return dataDir;
-}; 
+var config = require('../config');
 
 exports.getUploadFile = function (fileName) {
-    var path = require('path'), 
-    dataDir = exports.getUploadDir();
+    var path = require('path');
 
-    return path.normalize(dataDir + '/' + fileName);
+    return path.normalize(config.data + '/' + fileName);
 };
 
 exports.getDateYMD = function (date) {
