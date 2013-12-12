@@ -36,8 +36,9 @@
   "devDependencies": {
     "jshint": "~2.3.0",
     "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.0",
-    "grunt-contrib-clean": "~0.5.0"
+    "grunt-contrib-jshint" : "~0.7.0",
+    "grunt-contrib-clean" : "~0.5.0",
+    "grunt-contrib-uglify" : "~0.2.7"
   },
   "scripts": {
     "start": "node server.js"

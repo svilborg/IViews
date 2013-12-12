@@ -8,10 +8,18 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             }
+        },
+        uglify: {
+            my_target: {
+                files: {
+                    'public/main.min.js': ['public/main.js']
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('default', ['jshint']);
 };

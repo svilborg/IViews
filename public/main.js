@@ -4,8 +4,6 @@
 var table = "";
 
 Ink.createModule('Ink.Comix.IViews', '1', ['Ink.Dom.Css_1'], function (Css) {
-    'use strict';
-
     /**
      * Methods
      *
@@ -144,6 +142,8 @@ Ink.createModule('Ink.Comix.IViews', '1', ['Ink.Dom.Css_1'], function (Css) {
             }).render({
                 "msg": msg
             });
+
+
 
             setTimeout(function () {
                 if (typeof callback === "function") {
