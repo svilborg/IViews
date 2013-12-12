@@ -272,56 +272,46 @@ exports.upload = function (req, res) {
 
         if (!fileName) {
             res.redirect('/form?id=' + id + '&error=Missing File');
-            res.end();
-            return false;
         } else if (!req.body.id) {
             res.redirect('/form?id=' + id + '&error=Missing Id');
-            res.end();
-            return false;
         } else {
-
             fs.exists(filePath, function (exists) {
                 if (exists) {
                     res.redirect('/form?id=' + id + '&error=File name already exists');
-                    res.end();
-                    return false;
-                }
+                } else {
+                    fs.writeFile(filePath, data, function (err) {
 
-                fs.writeFile(filePath, data, function (err) {
+                        if (!err) {
 
-                    if (!err) {
+                            try {
+                                var oid = db.ObjectId(id);
 
-                        try {
-                            var oid = db.ObjectId(id);
+                                db.candidates.update({
+                                    _id: oid
+                                }, {
+                                    $set: {
+                                        file: fileName
+                                    }
+                                }, {
+                                    multi: false
+                                }, function (e) {
+                                    if (!e) {
+                                        res.redirect('/form?id=' + id + '&ok=1');
+                                    } else {
+                                        res.redirect('/form?id=' + id + '&error=' + e.message);
 
-                            db.candidates.update({
-                                _id: oid
-                            }, {
-                                $set: {
-                                    file: fileName
-                                }
-                            }, {
-                                multi: false
-                            }, function (e) {
-                                if (!e) {
-                                    res.redirect('/form?id=' + id + '&ok=1');
-                                    res.end();
-                                } else {
-                                    res.redirect('/form?id=' + id + '&error=' + e.message);
-                                    res.end();
-                                }
-                            });
-                        } catch (e) {
-                            res.redirect('/form?id=' + id + '&error=' + e.message);
-                            res.end();
+                                    }
+                                });
+                            } catch (e) {
+                                res.redirect('/form?id=' + id + '&error=' + e.message);
+
+                            }
+                        } else {
+                            console.log(err);
+                            res.redirect('/form?id=' + id + '&error=' + err);
                         }
-                    } else {
-                        console.log(err);
-
-                        res.redirect('/form?id=' + id + '&error=' + err);
-                        res.end();
-                    }
-                });
+                    });
+                }
             });
 
         }
