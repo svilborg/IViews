@@ -3,9 +3,9 @@
 'use strict';
 
 var express = require('express'),
-    passport = require('./app/lib/passport.js'),
-    flash = require('connect-flash'),
-    config = require('./app/config');
+passport = require('./app/lib/passport.js'),
+flash = require('connect-flash'),
+config = require('./app/config');
 
 // Define the application.
 var IViewsApp = function () {
@@ -32,14 +32,13 @@ var IViewsApp = function () {
         }
     };
 
-
     /** terminator === the termination handler Terminate server on receipt of the
      * specified signal.
      *
      * @param {string}
      *            sig Signal to terminate on.
      */
-    self.terminator = function (sig) {
+     self.terminator = function (sig) {
         if (typeof sig === 'string') {
             console.log('%s: Received %s - terminating app ...', Date(Date.now()), sig);
             process.exit(1);
@@ -58,7 +57,7 @@ var IViewsApp = function () {
 
         // Removed 'SIGPIPE' from the list - bugz 852598.
         ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
-            'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
+        'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
         ].forEach(function (element, index, array) {
             process.on(element, function () {
                 self.terminator(element);
@@ -110,7 +109,10 @@ var IViewsApp = function () {
         self.app.use(express.bodyParser());
         self.app.use(express.methodOverride());
         self.app.use(flash());
-        //self.app.use(express.logger('dev'));
+
+        if (config.debug) {
+            self.app.use(express.logger('dev'));            
+        };
 
         // Routes
         ////////////////
