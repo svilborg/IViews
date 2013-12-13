@@ -1,8 +1,6 @@
 'use strict';
 
-exports.index = function (req, res) {
-    //console.log('req user', req.user);
-    
+exports.index = function (req, res) {    
     res.render('index', {
         title : 'InterViews'
     });

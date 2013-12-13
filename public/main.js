@@ -12,22 +12,6 @@ Ink.createModule('Ink.Comix.IViews', '1', ['Ink.Dom.Css_1'], function (Css) {
      */
     var module = {
         /**
-         * Private
-         *
-         * @method _privateMethod
-         * @return {String} String 'foo' is returned
-         */
-        _privateMethod: function () {
-            return null;
-        },
-
-        /**
-         * @property publicProperty
-         * @readOnly
-         */
-        publicProperty: '',
-
-        /**
          * Loads Summary Info
          *
          * @method publicMethod
