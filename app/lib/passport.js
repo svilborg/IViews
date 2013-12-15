@@ -6,7 +6,7 @@ dbLib = require('./db'),
 db = dbLib.db();
 
 passport.use(new LocalStrategy(function (username, password, done) {
-
+    console.log("Login");
     db.users.findOne({
         username : username
     }, function (e, record) {
@@ -20,6 +20,8 @@ passport.use(new LocalStrategy(function (username, password, done) {
                 return done(null, false, { message: 'Incorrect password.' });
             }
         } else {
+            console.log("Login Error - ", e);
+            
             return done(null, false, { message: 'Incorrect username/password.' });
         }
     });

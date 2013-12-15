@@ -110,10 +110,8 @@ var IViewsApp = function () {
         self.app.use(express.methodOverride());
         self.app.use(flash());
 
-        if (config.debug) {
-            self.app.use(express.logger('dev'));            
-        };
-
+        self.app.use(express.logger(':date :method :url :referrer :status :user-agent :remote-addr'));  
+    
         // Routes
         ////////////////
 
